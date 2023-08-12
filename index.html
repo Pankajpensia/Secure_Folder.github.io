@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+  <title>Secure Folder 📁</title>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  <!-- Google Fonts Roboto -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" />
+  <!-- MDB -->
+  <link rel="stylesheet" href="mdb.min.css" />
+</head>
+<body>
+  <h1 class="text-center my-4">Welcome Back 🎉</h1>
+  <h3 class="text-center">Login Now</h3>
+
+  <div class="container my-4">
+    <form>
+      <!-- Mobile Number input -->
+      <div class="form-outline mb-4">
+        <input type="tel" id="mobileNumber" class="form-control" />
+        <label class="form-label" for="mobileNumber">Mobile Number</label>
+      </div>
+
+      <!-- Password input -->
+      <div class="form-outline mb-4">
+        <input type="password" id="password" class="form-control" />
+        <label class="form-label" for="password">Password</label>
+      </div>
+
+      <!-- Submit button -->
+      <button type="button" class="btn btn-primary btn-block mb-4" id="submitBtn">Log In</button>
+
+      <!-- Register buttons -->
+      <div class="text-center">
+        <p>Not a member? <a href="Register.html">Register</a></p>
+      </div>
+    </form>
+  </div>
+
+  <script src="mdb.min.js"></script>
+  <!-- Custom scripts -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-auth.js";
+    import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-database.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBhc0fk_t5q6xo4FySI9XXGHdEfLssCru8",
+    authDomain: "folder-24d4a.firebaseapp.com",
+    projectId: "folder-24d4a",
+    storageBucket: "folder-24d4a.appspot.com",
+    messagingSenderId: "256440210644",
+    appId: "1:256440210644:web:244b521bde9a1aa728d741",
+    measurementId: "G-32LGWTYVNN"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const database = getDatabase();
+
+    const submitButton = document.querySelector("#submitBtn");
+    submitButton.addEventListener("click", async function () {
+      const mobileNumber = document.getElementById("mobileNumber").value + "@gmail.com";
+      const password = document.getElementById("password").value;
+
+      try {
+        const userCredential = await signInWithEmailAndPassword(auth, mobileNumber, password);
+        const user = userCredential.user;
+        console.log("Success! Welcome back!");
+        alert("Login Successfully ! Welcome back!");
+
+        const UserPath = mobileNumber.replace("@gmail.com", "");
+        onValue(ref(database, `Users/${UserPath}`), (snapshot) => {
+          snapshot.forEach((childSnapshot) => {
+            const childData = childSnapshot.val();
+            localStorage.setItem("FirstName", childData.FirstName);
+            localStorage.setItem("LastName", childData.LastName);
+            localStorage.setItem("Mobile", childData.Email);
+          });
+        });
+
+        // Redirect to a new page or perform other actions
+        window.open("Home.html");
+      } catch (error) {
+        alert("Login Error");
+        console.log(error);
+      }
+    });
+  </script>
+</body>
+</html>

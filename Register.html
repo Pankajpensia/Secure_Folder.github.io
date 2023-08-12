@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+  <title>Secure Folder 📁</title>
+
+  <!-- Font Awesome -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+  />
+  <!-- Google Fonts Roboto -->
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap"
+  />
+  <!-- MDB -->
+  <link rel="stylesheet" href="mdb.min.css" />
+</head>
+<body>
+  <h1 class="text-center my-4">Welcome Back 🎉</h1>
+  <h3 class="text-center">Sign Up Now</h3>
+  
+  <div class="container my-4">
+    <form id="register-form">
+      <div class="row mb-4">
+        <div class="col">
+          <div class="form-outline">
+            <input type="text" id="firstName" class="form-control" />
+            <label class="form-label" for="firstName">First name</label>
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-outline">
+            <input type="text" id="lastName" class="form-control" />
+            <label class="form-label" for="lastName">Last name</label>
+          </div>
+        </div>
+      </div>
+      
+      <div class="form-outline mb-4">
+        <input type="number" id="email" min="0" max="9999999999" class="form-control" />
+        <label class="form-label" for="email" >Mobile Number</label>
+      </div>
+      
+      <div class="form-outline mb-4">
+        <input type="password" id="password" class="form-control" />
+        <label class="form-label" for="password">Password</label>
+      </div>
+      
+      <button type="submit" class="btn btn-primary btn-block mb-4" id="submit">Sign up</button>
+      
+      <div class="text-center">
+        <p>Already Have An Account? <a href="index.html">Login Now</a></p>
+      </div>
+    </form>
+  </div>
+  
+  <script type="text/javascript" src="mdb.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.1.0/firebase-auth.js"></script>
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-app.js";
+    import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-auth.js";
+    import { getDatabase, ref, set, push } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-database.js";
+    
+    const firebaseConfig = {
+      apiKey: "AIzaSyBhc0fk_t5q6xo4FySI9XXGHdEfLssCru8",
+    authDomain: "folder-24d4a.firebaseapp.com",
+    projectId: "folder-24d4a",
+    storageBucket: "folder-24d4a.appspot.com",
+    messagingSenderId: "256440210644",
+    appId: "1:256440210644:web:244b521bde9a1aa728d741",
+    measurementId: "G-32LGWTYVNN"
+  };
+
+    const firebaseApp = initializeApp(firebaseConfig);
+    const auth = getAuth(firebaseApp);
+    const database = getDatabase();
+
+    const registerForm = document.getElementById('register-form');
+
+    registerForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const firstName = document.getElementById('firstName');
+      const lastName = document.getElementById('lastName');
+      const email = document.getElementById('email');
+      const password = document.getElementById('password');
+
+      try {
+        const userCredential = await createUserWithEmailAndPassword(auth, email.value + "@gmail.com", password.value);
+         setTimeout(() => {
+              
+  const FirstNameVal = firstName.value;
+  const LasNameVal = lastName.value;
+  const EmailVal = email.value;
+  const PasswordVal = password.value;
+ 
+
+  if (EmailVal && PasswordVal) {
+    const usersRef = push(ref(database, "Users/"+EmailVal));
+    set(usersRef, {
+      FirstName: FirstNameVal,
+      LastName: LasNameVal,
+      Email: EmailVal,
+      Password: PasswordVal
+    })
+      .then(() => {
+        alert("Account Created Successfully 🥰 Please Go To Login Page");
+           window.open("index.html")
+      })
+      .catch((error) => {
+        console.error("Account Not Created 😥");
+      });
+  } else {
+    alert("Please Enter All Details");
+  }  
+         }, 500);
+    
+        // You can redirect or perform other actions here after successful registration.
+      } catch (error) {
+        alert('Registration error:' + error.massage);
+        // Handle registration error here.
+      }
+
+
+    });
+  </script>
+</body>
+</html>

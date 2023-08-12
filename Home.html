@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>Secure Folder 📁</title>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <!-- Google Fonts Roboto -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap"
+    />
+    <!-- MDB -->
+    <link rel="stylesheet" href="mdb.min.css" />
+  
+  <style type="text/css">
+  
+  body {
+  padding-bottom: 50px;
+  overflow:hidden;
+  }
+  
+  h1 {
+  margin-bottom: 2000px;
+  }
+  /* For Demo only */
+  .cd__main{
+  position: relative;
+  width: 360px !important;
+  height: 720px;
+  border: 2px solid #bbb;
+  }
+  /* end demo only */
+  .mobile-bottom-nav {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  will-change: transform;
+  transform: translateZ(0);
+  display: flex;
+  height: 50px;
+  box-shadow: 0 -2px 5px -2px #333;
+  background-color: #fff;
+  }
+  .mobile-bottom-nav__item {
+  flex-grow: 1;
+  text-align: center;
+  font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  cursor: pointer;
+  }
+  .mobile-bottom-nav__item--active {
+  color: red;
+  }
+  .mobile-bottom-nav__item-content {
+  display: flex;
+  flex-direction: column;
+  }
+
+  .Dark{
+    background-color: #333;
+  }
+
+  .Dark #Title{
+    color:white;
+  }
+
+  .Dark Info{
+    color:white;
+  }
+
+  .Dark .form-label{
+   color:white;
+  }
+
+  .Dark .mobile-bottom-nav{
+    background-color: black;
+  }
+
+.Dark .navbar-light{
+  background-color: black;
+}
+
+.Dark .card-body{
+  background-color: black;
+}
+
+.Dark .card-title{
+  color:white;
+}
+
+.Dark .card-text{
+  color:white;
+}
+
+.Dark #ProfileText{
+  color:white;
+}
+
+.Dark #formLabel{
+  color:white;
+}
+
+.Dark #DocText{
+  color:white;
+}
+
+  </style>
+  
+  </head>
+  <body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand navbar-light bg-primary" style="height: 45px;">
+  <!-- Container wrapper -->
+  <div class="container-fluid">
+
+<h3 id="Nav_User_Name" style="color:white; text-transform: uppercase; margin-top: 5px;">Hii, Users</h3> 
+<i class="fa-solid fa-moon" style="
+    position: absolute;
+    right: 60px;
+    color: white;
+    top: 16px;
+   cursor: pointer;
+"
+id="Mood"></i>         
+<img
+            src="person.png"
+            class="rounded-circle"
+            height="25"
+            alt="Black and White Portrait of a Man"
+            loading="lazy"
+            id="PersonImg"
+          />
+        </a>
+      </div>
+    </div>
+    <!-- Right elements -->
+  </div>
+  <!-- Container wrapper -->
+</nav>
+<!-- Navbar -->
+
+<!--bottom navbar -->
+
+<nav class="mobile-bottom-nav">
+	<div id="Home"  class="mobile-bottom-nav__item mobile-bottom-nav__item--active">
+		<div class="mobile-bottom-nav__item-content">
+			<i class="material-icons">home</i>
+			Home
+		</div>		
+	</div>
+	<div id="Doc"  class="mobile-bottom-nav__item">		
+		<div class="mobile-bottom-nav__item-content">
+			<i class="material-icons">folder</i>
+			Doc
+		</div>
+	</div>	
+	<div id="Profile" class="mobile-bottom-nav__item">
+		<div class="mobile-bottom-nav__item-content">
+			<i class="material-icons">person</i>
+			Profile
+		</div>		
+	</div>
+</nav> 
+
+<!--End bottom navbar -->
+
+
+<!-- Home Page -->
+<div id="HomePage" style="display:block;" >
+<div class="container my-4">
+<form>
+  <!-- Title input -->
+  <div class="form-outline mb-4">
+    <input type="text" id="Title" class="form-control" />
+    <label class="form-label" id="formLabel" for="Docuement_Title">Docuement Title</label>
+  </div>
+
+  <!-- Info input -->
+  <div class="form-outline mb-4">
+    <input type="text" id="Info" class="form-control" />
+    <label class="form-label" id="formLabel" for="Document_Info">Document Information</label>
+  </div>
+
+  <!-- Submit button -->
+  <button type="submit" class="btn btn-primary btn-block" id="submit" >Add Document</button>
+</form>
+</div>
+   <div class="container my-4" id="HomeContainer" style="position: absolute; height:64%; bottom:30px; overflow:scroll;"  ></div>
+</div>
+
+<!-- Doc Page -->
+<div id="DocPage" style="display:none;"  >
+<h1 class="text-center my-4" id="DocText">All Documents </h1>
+   <div class="container my-4" id="DocContainer" ></div>
+</div>
+
+<!-- Profile Page -->
+
+<div class="container" id="ProfilePage" style="display:none;" >
+
+ <h1 class="text-center my-4 " id="ProfileText">Profile</h1>
+
+ <div class="container my-4">
+  <div class="card  ">
+    <div class="bg-image hover-overlay ripple center" style="margin: auto;" data-mdb-ripple-color="light">
+      <img src="person.png" class="img-fluid " style="margin: auto;" />
+      <a href="#!">
+        <div class="mask" style="background-color: rgba(251, 251, 251, 0.15)"></div>
+      </a>
+    </div>
+  
+    <div class="card-body">
+      
+      <h5 class="card-title" id="ProfileName"></h5>
+      
+      <p class="card-text" id="ProfileEmail"></p>
+      
+      <a href="index.html" type="button" class="btn btn-danger">Log Out</a>
+    </div>
+  </div>
+ </div>
+
+</div>
+
+    <script type="text/javascript" src="mdb.min.js"></script>
+    <!-- Custom scripts -->
+   <script type="module" src="script.js"></script>
+   <script type="module" src="getData.js"></script>
+  
+<script type="text/javascript">
+alert("Please Poll to Refresh Now")
+
+
+const hasReloaded = localStorage.getItem("hasReloaded");
+
+if (!hasReloaded) {
+  // Set the 'hasReloaded' flag in localStorage
+  localStorage.setItem("hasReloaded", "true");
+
+  // Reload the page
+  location.reload();
+}
+
+let Light = document.querySelector(".bg-primary");
+let Mood = document.getElementById("Mood");
+let body = document.querySelector('body');
+
+Mood.addEventListener('click', function(){
+  body.classList.toggle('Dark');
+  Light.classList.toggle('bg-primary')
+})
+
+let PersonImg = document.getElementById("PersonImg");
+let TotalDoc = document.getElementById("TotalDoc");
+let NavUserName = document.getElementById("Nav_User_Name");
+let ProfileName = document.getElementById("ProfileName");
+let ProfileEmail = document.getElementById("ProfileEmail");
+
+let UserFirstName = localStorage.getItem("FirstName");
+let UserLastName = localStorage.getItem("LastName");
+
+
+NavUserName.innerHTML = localStorage.getItem("FirstName");
+ProfileName.innerHTML = "Full Name:- " + UserFirstName + " " + UserLastName;
+ProfileEmail.innerHTML = "Mobile:- " + localStorage.getItem("Mobile")
+
+let HomeBtn = document.querySelector("#Home");
+let DocBtn = document.querySelector("#Doc");
+let ProfileBtn = document.querySelector("#Profile");
+
+let HomePage = document.querySelector("#HomePage");
+let DocPage = document.querySelector("#DocPage");
+let ProfilePage = document.querySelector("#ProfilePage");
+
+HomeBtn.addEventListener("click", function(){
+
+HomePage.style.display = "block"
+DocPage.style.display = "none"
+ProfilePage.style.display = "none"
+
+});
+
+PersonImg.addEventListener("click", function(){
+
+HomePage.style.display = "none"
+DocPage.style.display = "none"
+ProfilePage.style.display = "block"
+
+});
+
+DocBtn.addEventListener("click", function(){
+
+HomePage.style.display = "none"
+DocPage.style.display = "block"
+ProfilePage.style.display = "none"
+
+});
+
+ProfileBtn.addEventListener("click", function(){
+
+HomePage.style.display = "none"
+DocPage.style.display = "none"
+ProfilePage.style.display = "block"
+
+});
+
+var navItems = document.querySelectorAll(".mobile-bottom-nav__item");
+navItems.forEach(function(e, i) {
+	e.addEventListener("click", function(e) {
+		navItems.forEach(function(e2, i2) {
+			e2.classList.remove("mobile-bottom-nav__item--active");
+		})
+		this.classList.add("mobile-bottom-nav__item--active");
+	});
+});
+
+
+</script>  
+  
+  
+  </body>
+</html>
